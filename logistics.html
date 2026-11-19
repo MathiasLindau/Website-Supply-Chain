@@ -1,0 +1,1292 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Supply Chain Intelligence</title>
+  <link rel="stylesheet" href="style1.css">
+  <script src="logistics-demo.js" defer></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav-row">
+    <a href="index.html" aria-label="Supply Chain Intelligence – Homepage">
+      <img class="brand-logo" src="images/logo.png" alt="Supply Chain Intelligence"> 
+    </a> 
+    
+    <nav class="nav-links" aria-label="Main navigation">
+        <a href="logistics.html" class="nav-link">Logistics</a>
+        <a href="contract.html" class="nav-link">Contracts</a>
+        <a href="energy.html" class="nav-link">Energy</a>
+        <a href="inventory.html" class="nav-link">Inventory</a>
+        <a href="about.html" class="nav-link">About</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- REUSABLE LOGISTICS ICONS -->
+<svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <symbol id="icon-documents" viewBox="0 0 96 96">
+    <g fill="none" stroke="#14264a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Uneven piles of invoices -->
+      <path d="m9 70 29-5 4 20-29 5z" fill="#c8d8c5"/>
+      <path d="m7 64 29-5 4 20-29 5z" fill="#fff"/>
+      <path d="m10 57 29-5 4 20-29 5z" fill="#fff"/>
+      <path d="m14 60 17-3m-16 9 20-3" stroke="#93a9be"/>
+      <path d="m43 65 39 3-2 20-39-3z" fill="#dce5fc"/>
+      <path d="m45 57 39 3-2 20-39-3z" fill="#fff"/>
+      <path d="m42 49 39 3-2 20-39-3z" fill="#fff"/>
+      <path d="m49 57 23 2m-23 5 16 1" stroke="#93a9be"/>
+      <path d="M24 11h39l9 10v34H24z" fill="#fff"/>
+      <path d="M63 11v11h9M31 31h32M31 39h22" stroke="#93a9be"/>
+      <text x="31" y="26" font-family="Arial, sans-serif" font-size="7" font-weight="700" fill="#14264a" stroke="none">INVOICE</text>
+      <rect x="50" y="43" width="14" height="6" rx="1" fill="#eeecd7" stroke="none"/>
+    </g>
+  </symbol>
+
+  <symbol id="icon-billing" viewBox="0 0 96 96">
+    <g fill="none" stroke="#14264a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Continuous production: printer, invoices, envelopes, dispatch -->
+      <path d="M9 11h23v23H9z" fill="#fff"/>
+      <path d="M13 7h23v23H13z" fill="#fff"/>
+      <path d="M18 14h13M18 20h9" stroke="#93a9be"/>
+      <rect x="4" y="28" width="37" height="29" rx="3" fill="#c8d8c5"/>
+      <circle cx="33" cy="35" r="2" fill="#12836b" stroke="none"/>
+      <rect x="10" y="42" width="26" height="6" rx="1" fill="#14264a" stroke="none"/>
+      <path d="M15 45h18v17H15z" fill="#fff"/>
+      <path d="M19 51h10M19 56h7" stroke="#93a9be"/>
+      <path d="M43 38h16v24H43z" fill="#fff"/>
+      <path d="M47 44h8M47 50h8M47 56h5" stroke="#93a9be"/>
+      <path d="M65 40h15v17H65z" fill="#fff"/>
+      <path d="M61 48h23v14H61z" fill="#eeecd7"/>
+      <path d="m61 48 11 8 12-8"/>
+      <path d="M75 30h17v12H75z" fill="#eeecd7"/>
+      <path d="m75 30 8 7 9-7"/>
+      <rect x="4" y="63" width="88" height="13" rx="6.5" fill="#e1eee7"/>
+      <g fill="#fff">
+        <circle cx="13" cy="69.5" r="3"/><circle cx="27" cy="69.5" r="3"/>
+        <circle cx="41" cy="69.5" r="3"/><circle cx="55" cy="69.5" r="3"/>
+        <circle cx="69" cy="69.5" r="3"/><circle cx="83" cy="69.5" r="3"/>
+      </g>
+      <path d="M14 77v10M82 77v10" stroke-width="3"/>
+      <path d="M45 21h21m-5-5 5 5-5 5M79 16h13m-4-4 4 4-4 4" stroke="#e96a32" stroke-width="2.5"/>
+    </g>
+  </symbol>
+
+  <symbol id="icon-review" viewBox="0 0 96 96">
+    <g fill="none" stroke="#14264a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Reviewer, sweat drop, papers and magnifier -->
+      <path d="M8 66V48c0-12 33-12 33 0v18" fill="#c8d8c5"/>
+      <ellipse cx="25" cy="25" rx="13" ry="16" fill="#e8c9af"/>
+      <path d="M12 24c-3-20 27-24 27-3l-10-6-8 7z" fill="#14264a"/>
+      <path d="m19 27 3-1m8 0 3 1M23 35h6"/>
+      <path d="M45 20c-8 11-7 15-2 15s7-4 2-15" fill="#dce5fc" stroke="#2d51f0"/>
+      <path d="m7 69 36-4 2 20-36 4z" fill="#fff"/>
+      <path d="m11 62 36-4 2 20-36 4z" fill="#fff"/>
+      <path d="m15 55 36-4 2 20-36 4z" fill="#fff"/>
+      <path d="m21 62 19-2m-18 8 13-2" stroke="#93a9be"/>
+      <circle cx="65" cy="55" r="18" fill="#eeecd7"/>
+      <path d="m78 69 12 15" stroke-width="6"/>
+      <path d="M57 49h16M57 56h12M57 63h8" stroke="#12836b"/>
+      <path d="m35 48 14-8 9 6" fill="none" stroke="#e8c9af" stroke-width="6"/>
+    </g>
+  </symbol>
+
+  <symbol id="icon-alert" viewBox="0 0 96 96">
+    <g fill="none" stroke="#14264a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Recognisable euro notes protrude from the invoice pile -->
+      <path d="m8 68 66-5 3 23-66 5z" fill="#dce5fc"/>
+      <path d="m7 61 66-5 3 23-66 5z" fill="#fff"/>
+      <g transform="rotate(-12 63 36)">
+        <rect x="37" y="21" width="52" height="29" rx="2" fill="#c8d8c5" stroke="#12836b"/>
+        <rect x="42" y="26" width="42" height="19" rx="1" stroke="#12836b"/>
+        <path d="M66 29c-10-6-12 19 0 12M55 33h10M55 37h9" stroke="#12836b" stroke-width="2.5"/>
+      </g>
+      <rect x="30" y="38" width="62" height="31" rx="2" fill="#8fbaa0" stroke="#12836b"/>
+      <rect x="35" y="43" width="52" height="21" rx="1" stroke="#12836b"/>
+      <ellipse cx="66" cy="53" rx="11" ry="10" fill="#e1eee7" stroke="none"/>
+      <path d="M70 46c-13-7-14 23 0 15M57 51h12M57 56h11" stroke="#12836b" stroke-width="2.8"/>
+      <path d="M9 9h29l9 9v38H9z" fill="#fff"/>
+      <path d="M38 9v10h9M16 28h23M16 36h18M16 44h12" stroke="#93a9be"/>
+      <path d="m6 58 43-5 4 23-43 5z" fill="#fff"/>
+      <path d="m12 64 28-3m-27 9 19-2" stroke="#93a9be"/>
+      <path d="m52 75 29-3 2 15-29 3z" fill="#fff"/>
+      <path d="m57 80 17-2" stroke="#93a9be"/>
+    </g>
+  </symbol>
+
+  <symbol id="icon-records" viewBox="0 0 96 96">
+    <g fill="none" stroke="#14264a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Person sorting scattered papers into a desk stack -->
+      <path d="M31 56V41c0-15 35-15 35 0v15" fill="#c8d8c5"/>
+      <ellipse cx="48" cy="19" rx="11" ry="13" fill="#e8c9af"/>
+      <path d="M37 18c-2-18 24-18 23 1l-10-7-13 7" fill="#14264a"/>
+      <path d="M44 21h1m8 0h1M46 27h5"/>
+      <path d="m8 51 24-9 9 23-24 9z" fill="#fff"/>
+      <path d="m12 57 15-6m-12 12 14-5" stroke="#93a9be"/>
+      <path d="m27 59 22 4-4 17-22-4z" fill="#eeecd7"/>
+      <path d="M58 64h27v13H58zM58 58h27v13H58zM58 52h27v13H58z" fill="#fff"/>
+      <path d="M64 57h15M64 61h10" stroke="#93a9be"/>
+      <path d="m33 41 6 13 18-6m8-7 7 6-6 7" stroke="#e8c9af" stroke-width="7"/>
+      <path d="m46 37 21 3-2 13-21-3z" fill="#fff"/>
+      <path d="M6 79h84v5H6z" fill="#14264a"/>
+      <path d="M14 85v6M82 85v6"/>
+    </g>
+  </symbol>
+
+  <symbol id="icon-table" viewBox="0 0 64 64">
+    <g fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="8" y="10" width="48" height="43" rx="3" fill="#fff" stroke="#14264a"/>
+      <path d="M8 13a3 3 0 0 1 3-3h42a3 3 0 0 1 3 3v10H8z" fill="#14264a" stroke="none"/>
+      <path d="M24 23v30M40 23v30M8 33h48M8 43h48" stroke="#ccd6e1"/>
+      <path d="M13 16h6M29 16h6M45 16h6" stroke="#fff"/>
+      <rect x="27" y="36" width="10" height="5" rx="1" fill="#2d51f0" stroke="none"/>
+      <rect x="43" y="46" width="10" height="5" rx="1" fill="#12836b" stroke="none"/>
+    </g>
+  </symbol>
+
+  <symbol id="icon-label" viewBox="0 0 96 96">
+    <g fill="none" stroke="#14264a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Human applying a verdict sticker to an invoice -->
+      <path d="M7 55V41c0-13 28-13 28 0v20" fill="#c8d8c5"/>
+      <ellipse cx="22" cy="20" rx="10" ry="13" fill="#e8c9af"/>
+      <path d="M12 19c-3-17 24-18 21 0l-11-7z" fill="#14264a"/>
+      <path d="M18 22h1m7 0h1M20 28h5"/>
+      <path d="M43 14h31l12 12v60H43z" fill="#fff"/>
+      <path d="M74 14v13h12M51 36h26M51 43h20M51 72h25M51 78h18" stroke="#93a9be"/>
+      <rect x="50" y="50" width="29" height="16" rx="2" fill="#e1eee7" stroke="#12836b"/>
+      <path d="m54 58 3 3 5-6" stroke="#12836b" stroke-width="2.5"/>
+      <text x="65" y="61" font-family="Arial, sans-serif" font-size="8" font-weight="700" fill="#12836b" stroke="none">OK</text>
+      <path d="m31 42 11 16 13-4" stroke="#e8c9af" stroke-width="8"/>
+      <path d="m54 50 5 2-3 5" stroke="#e8c9af" stroke-width="4"/>
+      <rect x="8" y="70" width="28" height="14" rx="2" fill="#f8e8dc" stroke="#e96a32"/>
+      <path d="m12 74 6 6m0-6-6 6" stroke="#e96a32"/>
+      <text x="20" y="79" font-family="Arial, sans-serif" font-size="5.2" font-weight="700" fill="#e96a32" stroke="none">WRONG</text>
+    </g>
+  </symbol>
+
+  <symbol id="icon-problem" viewBox="0 0 96 96">
+    <g fill="none" stroke="#14264a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Restrained office portrait: one gesture, one invoice -->
+      <path d="M28 87V64c0-18 39-18 39 0v23" fill="#dce5fc"/>
+      <path d="m39 51 8 10 9-10v12l-9 11-8-11z" fill="#fff"/>
+      <path d="m47 61-3 5 3 12 4-12z" fill="#14264a" stroke="none"/>
+      <path d="M34 27c0-21 27-21 27 0v12c0 19-27 19-27 0z" fill="#e8c9af"/>
+      <path d="M34 30V23c-1-19 28-22 28 0v7l-7-12-13 7-8-1z" fill="#14264a"/>
+      <path d="M40 34h2m11 0h2M48 35l-2 7h4M43 48h9"/>
+      <path d="m65 66 13-24-17-22" stroke-width="11"/>
+      <path d="m65 66 13-24-17-22" stroke="#e8c9af" stroke-width="7"/>
+      <path d="m61 20-8-4m8 4-5-8" stroke="#e8c9af" stroke-width="4"/>
+      <path d="M7 50h23l8 8v31H7z" fill="#fff"/>
+      <path d="M30 50v9h8M13 66h18M13 73h13" stroke="#93a9be"/>
+      <circle cx="25" cy="80" r="9" fill="#eeecd7"/>
+      <path d="m32 87 7 6" stroke-width="3"/>
+      <path d="M25 75v6m0 4v.1" stroke="#e96a32" stroke-width="2.5"/>
+    </g>
+  </symbol>
+
+  <symbol id="icon-preparation" viewBox="0 0 96 96">
+    <g fill="none" stroke="#14264a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Clearly silhouetted workbench: tools, vice, thick top and legs -->
+      <path d="M13 26h70" stroke="#93a9be" stroke-width="3"/>
+      <path d="M20 8c-10 6-9 17 0 20v17h7V28c9-3 10-14 0-20v11h-7z" fill="#c8d8c5"/>
+      <path d="M45 7v26" stroke="#14264a" stroke-width="3"/>
+      <rect x="41" y="29" width="8" height="19" rx="2" fill="#e96a32"/>
+      <path d="M62 10h22v10H62z" fill="#14264a"/>
+      <path d="M72 20v27" stroke="#14264a" stroke-width="7"/>
+      <path d="M72 22v20" stroke="#e8c9af" stroke-width="4"/>
+      <rect x="6" y="57" width="84" height="10" rx="1" fill="#e8c9af"/>
+      <path d="M15 67v24M81 67v24" stroke-width="6"/>
+      <path d="M15 81h66" stroke-width="4"/>
+      <path d="M20 48h29v9H20zM23 42h26v9H23z" fill="#fff"/>
+      <path d="M29 47h14" stroke="#93a9be"/>
+      <path d="M60 51h8v9h10v-9h8v20H60z" fill="#93a9be"/>
+      <path d="M56 65h34M73 66v12M69 78h8" stroke-width="2.5"/>
+      <path d="M27 71h28v7H27z" fill="#c8d8c5"/>
+    </g>
+  </symbol>
+
+  <symbol id="icon-engine" viewBox="0 0 96 96">
+    <g fill="none" stroke="#14264a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M30 22v-9h8v9m8 0v-9h8v9m8 0v-9h8v9" fill="#93a9be"/>
+      <path d="m17 23 12-7 17 23-12 9zM50 38l17-23 13 8-17 25z" fill="#263c59"/>
+      <path d="m23 28 11 14m-3-19 11 14m18 0 11-14m-3 19 11-14" stroke="#93a9be"/>
+      <path d="M22 43h48l12 11v22H67l-6 9H28l-5-11H12V49h10z" fill="#14264a"/>
+      <path d="M13 51H5V39h13M79 45h9V29h-8" stroke-width="6"/>
+      <path d="M28 51h20M28 59h15M28 67h18" stroke="#93a9be" stroke-width="3"/>
+      <circle cx="66" cy="63" r="15" fill="#263c59" stroke="#93a9be"/>
+      <circle cx="66" cy="63" r="7" stroke="#e96a32" stroke-width="3"/>
+      <path d="M66 48v8m0 14v8M51 63h8m14 0h8" stroke="#93a9be"/>
+      <path d="M27 89h38M42 43V32h9v11" stroke-width="3"/>
+    </g>
+  </symbol>
+  <symbol id="icon-invoice-green" viewBox="0 0 48 64">
+    <path d="M5 3h26l12 12v46H5z" fill="#e1eee7" stroke="#12836b" stroke-width="2"/>
+    <path d="M31 3v13h12M12 24h23M12 31h16" fill="none" stroke="#12836b" stroke-width="2"/>
+    <path d="m13 45 7 7 14-15" fill="none" stroke="#12836b" stroke-width="4"/>
+  </symbol>
+  <symbol id="icon-invoice-red" viewBox="0 0 48 64">
+    <path d="M5 3h26l12 12v46H5z" fill="#f5e3e0" stroke="#b84949" stroke-width="2"/>
+    <path d="M31 3v13h12M12 24h23M12 31h16" fill="none" stroke="#b84949" stroke-width="2"/>
+    <path d="m15 39 18 16m0-16L15 55" fill="none" stroke="#b84949" stroke-width="4"/>
+  </symbol>
+
+  <symbol id="icon-predictors" viewBox="0 0 96 96">
+    <g fill="none" stroke="#14264a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="6" y="17" width="84" height="71" rx="3" fill="#fff"/>
+      <path d="M46 17h25v71H46z" fill="#f2d47c" stroke="none"/>
+      <path d="M6 34h84M6 51h84M6 69h84M31 17v71M46 17v71M71 17v71" stroke="#93a9be"/>
+      <path d="M12 25h12M12 42h12M12 60h12M12 78h12M77 42h7M77 60h7M77 78h7" stroke="#93a9be"/>
+      <path d="m52 41 6-5 7 5-7 7zM52 59l6-5 7 5-7 7zM52 77l6-5 7 5-7 7z" fill="#fff4cf" stroke="#ab7a19"/>
+      <path d="m58 5 2 6 6 2-6 2-2 6-2-6-6-2 6-2zM80 4l2 4 4 2-4 2-2 4-2-4-4-2 4-2z" fill="#f2d47c" stroke="#ab7a19"/>
+    </g>
+  </symbol>
+
+  <symbol id="icon-validation" viewBox="0 0 96 96">
+    <g fill="none" stroke="#14264a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Match model cards with verified green and red reference columns -->
+      <rect x="29" y="9" width="61" height="61" rx="2" fill="#fff"/>
+      <path d="m42 70-6 20m40-20 6 20M59 70v14" stroke-width="2.5"/>
+      <path d="M35 17h21v45H35z" fill="#e1eee7" stroke="none"/>
+      <path d="M63 17h21v45H63z" fill="#f5e3e0" stroke="none"/>
+      <path d="m41 24 4 4 6-8" stroke="#12836b" stroke-width="2.5"/>
+      <path d="m69 21 8 8m0-8-8 8" stroke="#b84949" stroke-width="2.5"/>
+      <use href="#icon-invoice-green" x="39" y="34" width="14" height="18"/>
+      <use href="#icon-invoice-green" x="39" y="48" width="14" height="18"/>
+      <use href="#icon-invoice-red" x="67" y="34" width="14" height="18"/>
+      <use href="#icon-invoice-red" x="67" y="48" width="14" height="18"/>
+      <circle cx="13" cy="36" r="8" fill="#e8c9af"/>
+      <path d="M5 35c-2-13 18-14 17 0l-9-5z" fill="#14264a"/>
+      <path d="M4 84V56c0-13 20-13 20 0v28" fill="#c8d8c5"/>
+      <path d="m20 57 11-12 12-3" stroke="#e8c9af" stroke-width="6"/>
+      <path d="M10 84v8M20 84v8"/>
+    </g>
+  </symbol>
+
+  <symbol id="icon-feed" viewBox="0 0 96 96">
+    <g fill="none" stroke="#14264a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <use href="#icon-review" x="1" y="2" width="40" height="43"/>
+      <path d="m4 5 34 36M38 5 4 41" stroke="#b84949" stroke-width="3"/>
+      <use href="#icon-documents" x="1" y="44" width="39" height="47"/>
+      <path d="M39 65h12m-5-5 5 5-5 5" stroke="#12836b" stroke-width="2.5"/>
+      <use href="#icon-engine" x="45" y="36" width="51" height="53"/>
+    </g>
+  </symbol>
+
+  <symbol id="icon-scan" viewBox="0 0 96 96">
+    <g fill="none" stroke="#14264a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <use href="#icon-documents" x="0" y="4" width="36" height="47"/>
+      <path d="M32 34h12m-5-5 5 5-5 5" stroke="#12836b" stroke-width="2.5"/>
+      <use href="#icon-engine" x="42" y="1" width="53" height="55"/>
+      <path d="M69 54v7H48m21 0h14"/>
+      <use href="#icon-invoice-green" x="37" y="62" width="25" height="34"/>
+      <use href="#icon-invoice-red" x="70" y="62" width="25" height="34"/>
+    </g>
+  </symbol>
+
+  <symbol id="icon-flagged" viewBox="0 0 96 96">
+    <g fill="none" stroke="#14264a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <!-- An employee investigates a red flag, with green cases set aside -->
+      <path d="M8 76V50c0-16 34-16 34 0v26" fill="#c8d8c5"/>
+      <ellipse cx="25" cy="23" rx="12" ry="15" fill="#e8c9af"/>
+      <path d="M13 23c-3-22 29-23 25 0l-12-8z" fill="#14264a"/>
+      <path d="M20 26h1m9 0h1M22 33h7"/>
+      <rect x="44" y="30" width="36" height="45" rx="3" fill="#fff"/>
+      <rect x="49" y="35" width="26" height="13" rx="1" fill="#b84949" stroke="none"/>
+      <path d="m58 38 7 7m0-7-7 7" stroke="#fff"/>
+      <path d="M51 55h20M51 62h12" stroke="#93a9be"/>
+      <path d="m36 54 13 6" stroke="#e8c9af" stroke-width="6"/>
+      <circle cx="73" cy="67" r="12" fill="#eeecd7"/>
+      <path d="m82 77 10 12" stroke-width="4"/>
+      <path d="M68 64h10M68 69h7" stroke="#93a9be"/>
+      <rect x="8" y="81" width="33" height="10" rx="2" fill="#e1eee7" stroke="#12836b"/>
+      <path d="m18 85 3 3 6-6" stroke="#12836b" stroke-width="2.5"/>
+    </g>
+  </symbol>
+
+  <symbol id="icon-technical" viewBox="0 0 96 96">
+    <g fill="none" stroke="#14264a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <use href="#icon-documents" x="0" y="2" width="32" height="42"/>
+      <path d="M29 30h13m-5-5 5 5-5 5" stroke="#12836b" stroke-width="2.5"/>
+      <use href="#icon-engine" x="40" y="2" width="56" height="56"/>
+      <path d="M69 59v6H37m32 0h13" stroke="#12836b"/>
+      <use href="#icon-invoice-green" x="25" y="65" width="23" height="30"/>
+      <use href="#icon-invoice-red" x="70" y="65" width="23" height="30"/>
+    </g>
+  </symbol>
+
+  <symbol id="icon-implementation" viewBox="0 0 96 96">
+    <g fill="none" stroke="#14264a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <!-- A composed colleague with a raised index finger -->
+      <path d="M19 89V63c0-18 43-18 43 0v26" fill="#dce5fc"/>
+      <path d="m32 50 9 10 9-10v13l-9 9-9-9z" fill="#fff"/>
+      <path d="m41 60-3 6 3 12 4-12z" fill="#14264a" stroke="none"/>
+      <ellipse cx="41" cy="31" rx="14" ry="19" fill="#e8c9af"/>
+      <path d="M27 29c-3-25 32-28 29 0l-10-12-19 8z" fill="#14264a"/>
+      <path d="M34 33h2m12 0h2M42 35l-2 6h4m-8 5h10"/>
+      <path d="m60 68 17-12-2-23" stroke-width="11"/>
+      <path d="m60 68 17-12-2-23" stroke="#e8c9af" stroke-width="7"/>
+      <path d="M75 35V13c0-5-7-5-7 0v21" fill="#e8c9af"/>
+      <path d="M68 34h13v11H68z" fill="#e8c9af"/>
+      <path d="M84 13h6M81 5l4-3" stroke="#e96a32" stroke-width="2.5"/>
+    </g>
+  </symbol>
+</svg>
+
+  <!-- 1. HERO: Bild und Einleitung -->
+
+  <section class="hero">
+    <div class="container hero-panel">
+
+        <div class="hero-copy">
+
+          <p class="eyebrow">LOGISTICS</p>
+
+          <h1>Are your freight invoices correct?</h1>
+
+          <p class="intro">
+            Freight invoices contain valuable information about transport
+            costs, routes and services. Comparing them with agreed prices
+            can reveal unusual charges that deserve a closer look.
+          </p>
+
+        </div>
+
+        <div class="hero-image hero-image--fill">
+          <img
+            src="Image2/pexels-jan-van-der-wolf-11680885-33537946.jpg"
+            alt="Cargo ships and containers at a commercial port"
+          >
+        </div>
+
+    </div>
+  </section>
+
+<!-- 2. THE PROBLEM -->
+
+<section class="section section-soft logistics-explainer logistics-problem">
+
+  <div class="container">
+
+    <div class="section-heading section-heading--illustrated">
+
+      <div class="section-heading-copy">
+
+        <p class="eyebrow">THE PROBLEM</p>
+
+        <h2>Why are freight invoices difficult to verify?</h2>
+
+        <p>
+          High invoice volumes, automated billing and limited manual
+          checks leave room for overcharges.
+        </p>
+
+      </div>
+
+      <svg class="section-illustration" viewBox="0 0 96 96" aria-hidden="true">
+        <use href="#icon-problem"/>
+      </svg>
+
+    </div>
+
+    <ol class="tool-grid">
+
+      <!-- 01: INVOICE VOLUME -->
+
+      <li class="tool-card">
+
+        <div class="tool-card-media">
+          <img src="Image2/soap-so-0xfaLGdmtm4-unsplash.jpg"
+             alt="Stack of freight invoices"
+             loading="lazy">
+          <button class="card-info-trigger" type="button"
+                  aria-label="More information" aria-expanded="false"
+                  aria-controls="card-info-1">+</button>
+        </div>
+
+        <h3>Thousands of invoices</h3>
+
+        <p>
+          Large numbers of carrier invoices arrive every day.
+          Each contains rates, services and surcharges to check.
+        </p>
+
+        <div class="card-info-panel" id="card-info-1" aria-hidden="true" inert>
+          <button class="card-info-close" type="button" aria-label="Close">×</button>
+
+          <div class="card-info-content">
+
+            <div class="card-flow" role="group" aria-label="Process steps" tabindex="0">
+              <span class="flow-step is-current">
+                <svg class="flow-icon" viewBox="0 0 96 96" aria-hidden="true"><use href="#icon-documents"/></svg>
+                <span class="flow-label">Invoices</span>
+              </span>
+            </div>
+
+            <p class="eyebrow">INVOICE VOLUME</p>
+            <h4>Many records, limited time.</h4>
+            <p>
+              Thousands of historical invoices create a large
+              amount of information to review. Even small
+              discrepancies can be difficult to identify
+              consistently.
+            </p>
+
+          </div>
+        </div>
+
+      </li>
+
+      <!-- 02: AUTOMATED BILLING -->
+
+      <li class="tool-card">
+
+        <div class="tool-card-media">
+          <img src="Image2/pexels-mizunokozuki-12899140.jpg"
+             alt="Computer screen displaying digital information"
+             loading="lazy">
+          <button class="card-info-trigger" type="button"
+                  aria-label="More information" aria-expanded="false"
+                  aria-controls="card-info-2">+</button>
+        </div>
+
+        <h3>Automated carrier billing</h3>
+
+        <p>
+          Carriers generate invoices automatically.
+          Basic checks do not necessarily compare every
+          charge with agreed rates.
+        </p>
+
+        <div class="card-info-panel" id="card-info-2" aria-hidden="true" inert>
+          <button class="card-info-close" type="button" aria-label="Close">×</button>
+
+          <div class="card-info-content">
+
+            <div class="card-flow" role="group" aria-label="Process steps" tabindex="0">
+              <span class="flow-step">
+                <svg class="flow-icon" viewBox="0 0 96 96" aria-hidden="true"><use href="#icon-documents"/></svg>
+                <span class="flow-label">Invoices</span>
+              </span>
+              <span class="flow-step is-current">
+                <svg class="flow-icon" viewBox="0 0 96 96" aria-hidden="true"><use href="#icon-billing"/></svg>
+                <span class="flow-label">Billing</span>
+              </span>
+            </div>
+
+            <p class="eyebrow">AUTOMATED BILLING</p>
+            <h4>Basic checks are not enough.</h4>
+            <p>
+              Automated plausibility checks can identify
+              obvious errors, but may not compare every
+              charge with individual contract conditions.
+            </p>
+
+          </div>
+        </div>
+
+      </li>
+
+      <!-- 03: MANUAL REVIEW -->
+
+      <li class="tool-card">
+
+        <div class="tool-card-media">
+          <img src="Image2/pexels-tima-miroshnichenko-6694921.jpg"
+             alt="Employee manually reviewing documents"
+             loading="lazy">
+          <button class="card-info-trigger" type="button"
+                  aria-label="More information" aria-expanded="false"
+                  aria-controls="card-info-3">+</button>
+        </div>
+
+        <h3>Manual invoice review</h3>
+
+        <p>
+          Employees still need to review invoices while
+          managing daily operations. Detailed checks take time.
+        </p>
+
+        <div class="card-info-panel" id="card-info-3" aria-hidden="true" inert>
+          <button class="card-info-close" type="button" aria-label="Close">×</button>
+
+          <div class="card-info-content">
+
+            <div class="card-flow" role="group" aria-label="Process steps" tabindex="0">
+              <span class="flow-step">
+                <svg class="flow-icon" viewBox="0 0 96 96" aria-hidden="true"><use href="#icon-documents"/></svg>
+                <span class="flow-label">Invoices</span>
+              </span>
+              <span class="flow-step">
+                <svg class="flow-icon" viewBox="0 0 96 96" aria-hidden="true"><use href="#icon-billing"/></svg>
+                <span class="flow-label">Billing</span>
+              </span>
+              <span class="flow-step is-current">
+                <svg class="flow-icon" viewBox="0 0 96 96" aria-hidden="true"><use href="#icon-review"/></svg>
+                <span class="flow-label">Review</span>
+              </span>
+            </div>
+
+            <p class="eyebrow">MANUAL REVIEW</p>
+            <h4>Checking every invoice takes time.</h4>
+            <p>
+              Employees must compare billed prices with
+              contracts, routes and shipment records.
+              High workloads make detailed checks difficult.
+            </p>
+
+          </div>
+        </div>
+
+      </li>
+
+      <!-- 04: OVERCHARGES -->
+
+      <li class="tool-card">
+
+        <div class="tool-card-media">
+          <img src="Image2/pexels-kindelmedia-7688191.jpg"
+             alt="Hands checking details on a document"
+             loading="lazy">
+          <button class="card-info-trigger" type="button"
+                  aria-label="More information" aria-expanded="false"
+                  aria-controls="card-info-4">+</button>
+        </div>
+
+        <h3>Overcharges go unnoticed</h3>
+
+        <p>
+          Incorrect rates and surcharges can pass through.
+          Companies may pay more than agreed.
+        </p>
+
+        <div class="card-info-panel" id="card-info-4" aria-hidden="true" inert>
+          <button class="card-info-close" type="button" aria-label="Close">×</button>
+
+          <div class="card-info-content">
+
+            <div class="card-flow" role="group" aria-label="Process steps" tabindex="0">
+              <span class="flow-step">
+                <svg class="flow-icon" viewBox="0 0 96 96" aria-hidden="true"><use href="#icon-documents"/></svg>
+                <span class="flow-label">Invoices</span>
+              </span>
+              <span class="flow-step">
+                <svg class="flow-icon" viewBox="0 0 96 96" aria-hidden="true"><use href="#icon-billing"/></svg>
+                <span class="flow-label">Billing</span>
+              </span>
+              <span class="flow-step">
+                <svg class="flow-icon" viewBox="0 0 96 96" aria-hidden="true"><use href="#icon-review"/></svg>
+                <span class="flow-label">Review</span>
+              </span>
+              <span class="flow-step is-current">
+                <svg class="flow-icon" viewBox="0 0 96 96" aria-hidden="true"><use href="#icon-alert"/></svg>
+                <span class="flow-label">Costs</span>
+              </span>
+            </div>
+
+            <p class="eyebrow">FINANCIAL IMPACT</p>
+            <h4>Small errors add up.</h4>
+            <p>
+              Incorrect charges can remain undetected
+              across many shipments. Over time, these
+              differences increase transport costs.
+            </p>
+
+          </div>
+        </div>
+
+      </li>
+
+    </ol>
+
+  </div>
+
+</section>
+
+<!-- 3. DATA PREPARATION -->
+
+<section class="section logistics-explainer">
+
+  <div class="container">
+
+    <div class="section-heading section-heading--illustrated">
+
+      <div class="section-heading-copy">
+
+        <p class="eyebrow">DATA PREPARATION</p>
+
+        <h2>Prepare reliable data before training a model.</h2>
+
+        <p>
+          Collect records, organise their information
+          and label verified examples.
+        </p>
+
+      </div>
+
+      <svg class="section-illustration" viewBox="0 0 96 96" aria-hidden="true">
+        <use href="#icon-preparation"/>
+      </svg>
+
+    </div>
+
+    <ol class="tool-grid">
+
+      <!-- 01: COLLECT -->
+
+      <li class="tool-card">
+
+        <div class="tool-card-media">
+          <img src="Image2/pexels-kevinbidwell-31955577.jpg"
+             alt="Historical invoices and business records"
+             loading="lazy">
+          <button class="card-info-trigger" type="button"
+                  aria-label="More information" aria-expanded="false"
+                  aria-controls="card-info-5">+</button>
+        </div>
+
+        <h3>Collect historical records</h3>
+
+        <p>
+          Gather historical invoices, contracts and shipment
+          records from previous months or years.
+        </p>
+
+        <div class="card-info-panel" id="card-info-5" aria-hidden="true" inert>
+          <button class="card-info-close" type="button" aria-label="Close">×</button>
+
+          <div class="card-info-content">
+
+            <div class="card-flow" role="group" aria-label="Process steps" tabindex="0">
+              <span class="flow-step is-current">
+                <svg class="flow-icon" viewBox="0 0 96 96" aria-hidden="true"><use href="#icon-records"/></svg>
+                <span class="flow-label">Records</span>
+              </span>
+            </div>
+
+            <p class="eyebrow">COLLECT RECORDS</p>
+            <h4>Start with historical examples.</h4>
+            <p>
+              Previous invoices, agreed rates, carrier
+              details and actual shipment records provide
+              the examples needed for the analysis.
+            </p>
+
+          </div>
+        </div>
+
+      </li>
+
+      <!-- 02: STANDARDISE -->
+
+      <li class="tool-card">
+
+        <div class="tool-card-media">
+          <img src="Image2/pexels-yankrukov-7693222.jpg"
+             alt="People reviewing and comparing business documents"
+             loading="lazy">
+          <button class="card-info-trigger" type="button"
+                  aria-label="More information" aria-expanded="false"
+                  aria-controls="card-info-6">+</button>
+        </div>
+
+        <h3>Standardise the information</h3>
+
+        <p>
+          Different invoice formats are mapped into
+          one consistent data structure.
+        </p>
+
+        <div class="card-info-panel" id="card-info-6" aria-hidden="true" inert>
+          <button class="card-info-close" type="button" aria-label="Close">×</button>
+
+          <div class="card-info-content">
+
+            <div class="card-flow" role="group" aria-label="Process steps" tabindex="0">
+              <span class="flow-step">
+                <svg class="flow-icon" viewBox="0 0 96 96" aria-hidden="true"><use href="#icon-records"/></svg>
+                <span class="flow-label">Records</span>
+              </span>
+              <span class="flow-step is-current">
+                <svg class="flow-icon" viewBox="0 0 96 96" aria-hidden="true"><use href="#icon-table"/></svg>
+                <span class="flow-label">Structure</span>
+              </span>
+            </div>
+
+            <p class="eyebrow">DATA STANDARDISATION</p>
+            <h4>One format for every record.</h4>
+            <p>
+              Invoice ID is mapped to ID, invoice date to date,
+              and route to route. The same fields are used
+              across all records.
+            </p>
+
+          </div>
+        </div>
+
+      </li>
+
+      <!-- 03: LABEL -->
+
+      <li class="tool-card">
+
+        <div class="tool-card-media">
+          <img src="Image2/pexels-toulouse-3195784.jpg"
+             alt="Reviewing records and checking information"
+             loading="lazy">
+          <button class="card-info-trigger" type="button"
+                  aria-label="More information" aria-expanded="false"
+                  aria-controls="card-info-7">+</button>
+        </div>
+
+        <h3>Label verified cases</h3>
+
+        <p>
+          Compare historical invoices with verified references.
+          Mark each case as correct or incorrect.
+        </p>
+
+        <div class="card-info-panel" id="card-info-7" aria-hidden="true" inert>
+          <button class="card-info-close" type="button" aria-label="Close">×</button>
+
+          <div class="card-info-content">
+
+            <div class="card-flow" role="group" aria-label="Process steps" tabindex="0">
+              <span class="flow-step">
+                <svg class="flow-icon" viewBox="0 0 96 96" aria-hidden="true"><use href="#icon-records"/></svg>
+                <span class="flow-label">Records</span>
+              </span>
+              <span class="flow-step">
+                <svg class="flow-icon" viewBox="0 0 96 96" aria-hidden="true"><use href="#icon-table"/></svg>
+                <span class="flow-label">Structure</span>
+              </span>
+              <span class="flow-step is-current">
+                <svg class="flow-icon" viewBox="0 0 96 96" aria-hidden="true"><use href="#icon-label"/></svg>
+                <span class="flow-label">Labels</span>
+              </span>
+            </div>
+
+            <p class="eyebrow">MANUAL LABELLING</p>
+            <h4>Compare with a known solution.</h4>
+            <p>
+              Employees compare an invoice with verified
+              contract and shipment data. Confirmed examples
+              receive a correct or incorrect label for training.
+            </p>
+
+          </div>
+        </div>
+
+      </li>
+
+    </ol>
+
+  </div>
+
+</section>
+
+  <!-- 4. TECHNICAL SOLUTION: Modell entwickeln und testen -->
+
+  <section class="section section-soft logistics-explainer">
+
+    <div class="container">
+
+      <div class="section-heading section-heading--illustrated">
+        <div class="section-heading-copy">
+
+        <p class="eyebrow">TECHNICAL SOLUTION</p>
+
+        <h2>Find patterns that help identify unusual invoices.</h2>
+
+        <p>
+          Data science methods can help distinguish ordinary cost
+          patterns from cases that need closer investigation.
+        </p>
+
+        </div>
+        <svg class="section-illustration" viewBox="0 0 96 96" aria-hidden="true">
+          <use href="#icon-technical"/>
+        </svg>
+      </div>
+
+      <ol class="tool-grid">
+
+        <li class="tool-card">
+
+          <div class="tool-card-media">
+            <img
+            src="Image2/resource-database-TIUyoNGM0no-unsplash.jpg"
+            alt="Industrial operations and equipment"
+            loading="lazy"
+          >
+            <button class="card-info-trigger" type="button" aria-label="More information"
+                    aria-expanded="false" aria-controls="card-info-8">+</button>
+          </div>
+
+            <h3>Identify useful predictors</h3>
+            <p>
+              Explore which variables, such as transport mode, route,
+              service type and cost components, help distinguish
+              verified invoices from known errors.
+            </p>
+
+          <div class="card-info-panel" id="card-info-8" aria-hidden="true" inert>
+            <button class="card-info-close" type="button" aria-label="Close">×</button>
+            <div class="card-info-content">
+              <div class="card-flow" role="group" aria-label="Process steps" tabindex="0">
+                <span class="flow-step is-current">
+                  <svg class="flow-icon" viewBox="0 0 96 96" aria-hidden="true"><use href="#icon-predictors"/></svg>
+                  <span class="flow-label">Predictors</span>
+                </span>
+              </div>
+              <p class="eyebrow">USEFUL PREDICTORS</p>
+              <h4>Find the fields that explain a charge.</h4>
+              <p>A useful column can stand out like gold: carrier, service or route may help explain why a charge is expected. Check which fields remain useful across many verified examples.</p>
+            </div>
+          </div>
+
+        </li>
+
+        <li class="tool-card">
+
+          <div class="tool-card-media">
+            <img
+            src="Image2/pexels-altman-5125366.jpg"
+            alt="Electricity infrastructure"
+            loading="lazy"
+          >
+            <button class="card-info-trigger" type="button" aria-label="More information"
+                    aria-expanded="false" aria-controls="card-info-9">+</button>
+          </div>
+
+            <h3>Train and test the model</h3>
+            <p>
+              Use separate training and test data. Evaluate how well
+              the model identifies known cases and repeat the process
+              when the results are not reliable enough.
+            </p>
+
+          <div class="card-info-panel" id="card-info-9" aria-hidden="true" inert>
+            <button class="card-info-close" type="button" aria-label="Close">×</button>
+            <div class="card-info-content">
+              <div class="card-flow" role="group" aria-label="Process steps" tabindex="0">
+                <span class="flow-step">
+                  <svg class="flow-icon" viewBox="0 0 96 96" aria-hidden="true"><use href="#icon-predictors"/></svg>
+                  <span class="flow-label">Predictors</span>
+                </span>
+                <span class="flow-step is-current">
+                  <svg class="flow-icon" viewBox="0 0 96 96" aria-hidden="true"><use href="#icon-engine"/></svg>
+                  <span class="flow-label">Model</span>
+                </span>
+              </div>
+              <p class="eyebrow">MODEL TRAINING</p>
+              <h4>Give the model useful training examples.</h4>
+              <p>Like an engine needs the right inputs, a model needs reliable records and useful predictors. Learn from labelled training data, then assess performance on separate test data.</p>
+            </div>
+          </div>
+
+        </li>
+
+        <li class="tool-card">
+
+          <div class="tool-card-media">
+            <img
+            src="Image2/pexels-cottonbro-6803528.jpg"
+            alt="Warehouse shelving and inventory"
+            loading="lazy"
+          >
+            <button class="card-info-trigger" type="button" aria-label="More information"
+                    aria-expanded="false" aria-controls="card-info-10">+</button>
+          </div>
+
+            <h3>Validate the results</h3>
+            <p>
+              Test whether the useful patterns remain reliable on
+              previously unseen data. Noisy data and misleading
+              relationships must be considered before using the model.
+            </p>
+
+          <div class="card-info-panel" id="card-info-10" aria-hidden="true" inert>
+            <button class="card-info-close" type="button" aria-label="Close">×</button>
+            <div class="card-info-content">
+              <div class="card-flow" role="group" aria-label="Process steps" tabindex="0">
+                <span class="flow-step">
+                  <svg class="flow-icon" viewBox="0 0 96 96" aria-hidden="true"><use href="#icon-predictors"/></svg>
+                  <span class="flow-label">Predictors</span>
+                </span>
+                <span class="flow-step">
+                  <svg class="flow-icon" viewBox="0 0 96 96" aria-hidden="true"><use href="#icon-engine"/></svg>
+                  <span class="flow-label">Model</span>
+                </span>
+                <span class="flow-step is-current">
+                  <svg class="flow-icon" viewBox="0 0 96 96" aria-hidden="true"><use href="#icon-validation"/></svg>
+                  <span class="flow-label">Validate</span>
+                </span>
+              </div>
+              <p class="eyebrow">RESULT VALIDATION</p>
+              <h4>Compare predictions with verified answers.</h4>
+              <p>Compare the model’s red and green cards with known outcomes on unseen data. Matching colours show agreement; mismatches reveal errors that need investigation.</p>
+            </div>
+          </div>
+
+        </li>
+
+    </ol>
+
+    </div>
+
+  </section>
+
+  <!-- 5. PRACTICAL IMPLEMENTATION: Neue Rechnungen prüfen -->
+
+  <section class="section logistics-explainer">
+
+    <div class="container">
+
+      <div class="section-heading section-heading--illustrated">
+        <div class="section-heading-copy">
+
+        <p class="eyebrow">PRACTICAL IMPLEMENTATION</p>
+
+        <h2>From new invoices to a focused review.</h2>
+
+        <p>
+          Once validated, the model can support recurring invoice checks
+          and help employees focus on the cases that need attention.
+        </p>
+
+        </div>
+        <svg class="section-illustration" viewBox="0 0 96 96" aria-hidden="true">
+          <use href="#icon-implementation"/>
+        </svg>
+      </div>
+
+      <ol class="tool-grid">
+
+        <li class="tool-card">
+
+          <div class="tool-card-media">
+            <img
+            src="Image2/pexels-gustavo-fring-6720545.jpg"
+            alt="Freight transport operations"
+            loading="lazy"
+          >
+            <button class="card-info-trigger" type="button" aria-label="More information"
+                    aria-expanded="false" aria-controls="card-info-11">+</button>
+          </div>
+
+            <h3>Feed new data</h3>
+            <p>
+              Provide new daily or weekly invoices in the same
+              standardised format used to develop the model.
+            </p>
+
+          <div class="card-info-panel" id="card-info-11" aria-hidden="true" inert>
+            <button class="card-info-close" type="button" aria-label="Close">×</button>
+            <div class="card-info-content">
+              <div class="card-flow" role="group" aria-label="Process steps" tabindex="0">
+                <span class="flow-step is-current">
+                  <svg class="flow-icon" viewBox="0 0 96 96" aria-hidden="true"><use href="#icon-feed"/></svg>
+                  <span class="flow-label">New data</span>
+                </span>
+              </div>
+              <p class="eyebrow">RECURRING INPUT</p>
+              <h4>Let the model handle the first pass.</h4>
+              <p>Feed new invoices into the validated model in the same standardised format. Employees can focus their detailed review on flagged cases instead of checking every record manually.</p>
+            </div>
+          </div>
+
+        </li>
+
+        <li class="tool-card">
+
+          <div class="tool-card-media">
+            <img
+            src="Image2/pexels-pixabay-210607.jpg"
+            alt="Cargo ships and containers at a port"
+            loading="lazy"
+          >
+            <button class="card-info-trigger" type="button" aria-label="More information"
+                    aria-expanded="false" aria-controls="card-info-12">+</button>
+          </div>
+
+            <h3>Process the invoices</h3>
+            <p>
+              The model evaluates the available information and compares
+              each invoice with patterns learned from historical data.
+            </p>
+
+          <div class="card-info-panel" id="card-info-12" aria-hidden="true" inert>
+            <button class="card-info-close" type="button" aria-label="Close">×</button>
+            <div class="card-info-content">
+              <div class="card-flow" role="group" aria-label="Process steps" tabindex="0">
+                <span class="flow-step">
+                  <svg class="flow-icon" viewBox="0 0 96 96" aria-hidden="true"><use href="#icon-feed"/></svg>
+                  <span class="flow-label">New data</span>
+                </span>
+                <span class="flow-step is-current">
+                  <svg class="flow-icon" viewBox="0 0 96 96" aria-hidden="true"><use href="#icon-scan"/></svg>
+                  <span class="flow-label">Process</span>
+                </span>
+              </div>
+              <p class="eyebrow">INVOICE PROCESSING</p>
+              <h4>Turn invoice data into review signals.</h4>
+              <p>Capture the invoice fields and send them through the model. Green indicates an expected pattern; red highlights a potentially unusual invoice for further review.</p>
+            </div>
+          </div>
+
+        </li>
+
+        <li class="tool-card">
+
+          <div class="tool-card-media">
+            <img
+            src="Image2/pexels-ron-lach-9222427.jpg"
+            alt="Industrial operations and equipment"
+            loading="lazy"
+          >
+            <button class="card-info-trigger" type="button" aria-label="More information"
+                    aria-expanded="false" aria-controls="card-info-13">+</button>
+          </div>
+
+            <h3>Review flagged cases</h3>
+            <p>
+              Invoices can be marked as potentially unusual or
+              within the expected range. A flagged invoice needs
+              a second check; it is not automatically an error.
+            </p>
+
+          <div class="card-info-panel" id="card-info-13" aria-hidden="true" inert>
+            <button class="card-info-close" type="button" aria-label="Close">×</button>
+            <div class="card-info-content">
+              <div class="card-flow" role="group" aria-label="Process steps" tabindex="0">
+                <span class="flow-step">
+                  <svg class="flow-icon" viewBox="0 0 96 96" aria-hidden="true"><use href="#icon-feed"/></svg>
+                  <span class="flow-label">New data</span>
+                </span>
+                <span class="flow-step">
+                  <svg class="flow-icon" viewBox="0 0 96 96" aria-hidden="true"><use href="#icon-scan"/></svg>
+                  <span class="flow-label">Process</span>
+                </span>
+                <span class="flow-step is-current">
+                  <svg class="flow-icon" viewBox="0 0 96 96" aria-hidden="true"><use href="#icon-flagged"/></svg>
+                  <span class="flow-label">Review</span>
+                </span>
+              </div>
+              <p class="eyebrow">HUMAN REVIEW</p>
+              <h4>Investigate the red cards.</h4>
+              <p>Employees compare flagged invoices with contracts and shipment records. A red card is a request for a closer look; only a verified discrepancy should be treated as an error.</p>
+            </div>
+          </div>
+
+        </li>
+
+    </ol>
+
+    </div>
+
+  </section>
+
+  <!-- INTERACTIVE DEMO -->
+
+<section class="demo-launch">
+  <div class="container demo-launch-inner">
+
+    <div>
+      <p class="eyebrow">INTERACTIVE DEMO</p>
+      <h2>Explore sample freight data.</h2>
+      <p>
+        Explore 1,000 simulated European transport orders.
+        Each sample displays 10 randomly selected shipments.
+      </p>
+    </div>
+
+    <button class="demo-button" id="demo-open" type="button">
+      View demo
+    </button>
+
+  </div>
+</section>
+
+<!-- DEMO OVERLAY -->
+
+<div class="demo-overlay" id="demo-overlay" hidden>
+
+  <div class="demo-dialog"
+       role="dialog"
+       aria-modal="true"
+       aria-labelledby="demo-title">
+
+    <div class="demo-header">
+      <div class="demo-heading">
+        <div>
+          <p class="eyebrow" id="demo-stage-label">THE PROBLEM</p>
+          <h2 id="demo-title">Invoices keep arriving.</h2>
+          <p class="demo-description" id="demo-description">Carrier billing sends invoices straight to the office. Manual review struggles to keep up.</p>
+        </div>
+        <svg class="demo-stage-illustration" viewBox="0 0 96 96" aria-hidden="true"><use id="demo-stage-icon" href="#icon-problem"/></svg>
+      </div>
+
+      <button class="demo-close" id="demo-close"
+              type="button" aria-label="Close demo">
+        &times;
+      </button>
+
+    </div>
+
+    <div class="demo-intro" id="demo-intro" hidden>
+      <div class="demo-arrivals" aria-hidden="true">
+        <div class="demo-arrival-end">
+          <svg viewBox="0 0 96 96"><use href="#icon-billing"/></svg>
+          <span>Carrier billing</span>
+        </div>
+        <div class="demo-arrival-route">
+          <div class="demo-mail-stream">
+            <svg class="demo-mail demo-mail-one" viewBox="0 0 48 36"><path d="M3 3h42v30H3z" fill="#fff" stroke="#14264a" stroke-width="2"/><path d="m3 3 21 17L45 3" fill="none" stroke="#14264a" stroke-width="2"/></svg>
+            <svg class="demo-mail demo-mail-two" viewBox="0 0 96 96"><use href="#icon-documents"/></svg>
+            <svg class="demo-mail demo-mail-three" viewBox="0 0 48 36"><path d="M3 3h42v30H3z" fill="#eeecd7" stroke="#14264a" stroke-width="2"/><path d="m3 3 21 17L45 3" fill="none" stroke="#14264a" stroke-width="2"/></svg>
+            <svg class="demo-mail demo-mail-four" viewBox="0 0 96 96"><use href="#icon-documents"/></svg>
+          </div>
+          <span>Invoices &amp; emails →</span>
+        </div>
+        <div class="demo-arrival-end">
+          <svg viewBox="0 0 96 96"><use href="#icon-problem"/></svg>
+          <span>Invoice review desk</span>
+        </div>
+      </div>
+      <p>Invoices arrive in volume, while employees still need to check the details. Start by organising the records, then let the model focus the review.</p>
+      <button class="demo-button demo-button--primary" id="demo-continue" type="button">Prepare invoice data</button>
+    </div>
+
+    <div class="demo-loader" id="demo-loader" hidden>
+  <svg class="demo-engine" viewBox="0 0 96 96" aria-hidden="true"><use href="#icon-engine"/></svg>
+  <p>Analysing freight invoices...</p>
+  <span>Comparing invoices with simulated route benchmarks</span>
+</div>
+
+    <div class="demo-table-wrap">
+
+      <table class="demo-table">
+
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Shipment</th>
+            <th>Loading date</th>
+            <th>Delivery date</th>
+            <th>Location from</th>
+            <th>Location to</th>
+            <th>Distance (km)</th>
+            <th>Service description</th>
+            <th>Costs (€)</th>
+          </tr>
+        </thead>
+
+        <tbody id="shipment-rows">
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <p class="demo-review-hint" id="demo-review-hint" hidden>Click a red invoice row to inspect its benchmark comparison.</p>
+
+    <div class="demo-results" id="demo-results" hidden>
+
+  <div>
+    <p class="eyebrow">SIMULATED ANALYSIS</p>
+    <h3>Potential savings</h3>
+    <p>
+      Sum of invoice values flagged for further review.
+    </p>
+  </div>
+
+  <strong id="demo-savings">€ 0.00</strong>
+
+</div>
+
+<div class="demo-footer">
+
+  <p>Illustrative data only. No live system connected.</p>
+
+  <div class="demo-actions" id="demo-actions">
+
+    <button class="demo-button" id="demo-refresh" type="button">
+      Show another 10
+    </button>
+
+    <button class="demo-button demo-button--primary"
+            id="demo-run" type="button">
+      Run analysis
+    </button>
+
+  </div>
+
+</div>
+
+  </div>
+
+</div>
+
+<!-- INVOICE REVIEW: original invoice and a scenario-specific comparison -->
+<dialog class="invoice-dialog" id="invoice-review" aria-labelledby="invoice-review-title">
+  <div class="invoice-review-header">
+    <div>
+      <p class="eyebrow">PRACTICAL IMPLEMENTATION</p>
+      <h2 id="invoice-review-title">Invoice details</h2>
+      <p id="invoice-review-status" class="invoice-status" role="status"></p>
+    </div>
+    <svg class="invoice-stage-illustration" viewBox="0 0 96 96" aria-hidden="true"><use href="#icon-implementation"/></svg>
+    <button class="demo-close" id="invoice-review-close" type="button" aria-label="Close invoice details">×</button>
+  </div>
+  <div class="invoice-review-body">
+    <section class="invoice-original" aria-labelledby="invoice-original-title">
+      <p class="eyebrow">01 / ORIGINAL</p>
+      <h3 id="invoice-original-title">Invoice</h3>
+      <dl id="invoice-review-details" class="invoice-facts"></dl>
+    </section>
+    <section class="invoice-comparison" aria-labelledby="invoice-comparison-title">
+      <p class="eyebrow">02 / COMPARISON</p>
+      <h3 id="invoice-comparison-title">Invoice vs. benchmark</h3>
+      <p id="invoice-benchmark-route"></p>
+      <p class="invoice-demo-note">Illustrative benchmark for this simulated route and service. Driving time and extra-service costs scale with the route distance; service type adjusts the cost range. These are not market rates.</p>
+      <div class="invoice-comparison-scroll" tabindex="0" role="group" aria-label="Invoice benchmark comparison">
+        <table class="invoice-comparison-table">
+          <thead><tr><th scope="col">Field</th><th scope="col">This invoice</th><th scope="col">Scenario benchmark</th></tr></thead>
+          <tbody id="invoice-review-comparison"></tbody>
+        </table>
+      </div>
+      <p class="invoice-demo-note">If more than one category falls below or above its benchmark, the invoice gets a red light and needs a final human check. This helps companies save review time and catch potentially incorrect invoices.</p>
+    </section>
+  </div>
+</dialog>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+           <a class="brand" href="index.html" aria-label="Supply Chain Intelligence – Homepage">
+          <img
+          class="brand-logo"
+          src="images/logo.png"
+          alt="Supply Chain Intelligence">
+          </a>
+        <p>
+          Practical tools for forecasts, freight costs and margins.
+        </p>
+      </div>
+    </div>    
+
+    <div class="footer-bottom">
+      <span>© 2026 Supply Chain Data Science</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

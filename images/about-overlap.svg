@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" role="img" aria-labelledby="title desc">
+  <title id="title">Operations, Data Science and Tools</title>
+  <desc id="desc">Three overlapping circles show how operations, data science and tools combine to support better decisions.</desc>
+  <defs>
+    <style>
+      .heading { font: 700 27px Arial, Helvetica, sans-serif; fill: #123653; }
+      .sub { font: 400 18px Arial, Helvetica, sans-serif; fill: #294b64; }
+      .center { font: 700 25px Arial, Helvetica, sans-serif; fill: #ffffff; }
+    </style>
+  </defs>
+  <circle cx="450" cy="220" r="170" fill="#a9cfe4" fill-opacity=".68"/>
+  <circle cx="340" cy="385" r="170" fill="#b9d8c9" fill-opacity=".70"/>
+  <circle cx="560" cy="385" r="170" fill="#f1d39a" fill-opacity=".70"/>
+
+  <g text-anchor="middle">
+    <text class="heading" x="450" y="157">Operations</text>
+    <text class="sub" x="450" y="185">Real-world challenges</text>
+
+    <text class="heading" x="315" y="430">Data Science</text>
+    <text class="sub" x="315" y="458">Methods and analysis</text>
+
+    <text class="heading" x="585" y="430">Tools</text>
+    <text class="sub" x="585" y="458">Automation and applications</text>
+  </g>
+
+  <circle cx="450" cy="336" r="72" fill="#145073" fill-opacity=".94"/>
+  <text class="center" text-anchor="middle" x="450" y="330">Better</text>
+  <text class="center" text-anchor="middle" x="450" y="361">decisions</text>
+</svg>
